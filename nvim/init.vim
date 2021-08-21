@@ -16,7 +16,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'itchyny/lightline.vim'
-Plug 'sainnhe/edge'
+Plug 'bluz71/vim-nightfly-colors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Moving around easier
 Plug 'easymotion/vim-easymotion'
@@ -29,11 +29,10 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'tpope/vim-abolish' " For case perserved subtitue :%S
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat'
-Plug 'vim-ruby/vim-ruby'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vim-which-key'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
 call plug#end()
 
@@ -64,8 +63,8 @@ set foldmethod=indent
 set foldlevel=99
 
 let g:is_posix = 1
-let g:indentLine_char = '▏'
-let g:indentLine_color_gui = '#302f2f'
+" let g:indentLine_char = '▏'
+" let g:indentLine_color_gui = '#302f2f'
 
 set noswapfile
 set nojoinspaces
@@ -78,10 +77,7 @@ set termguicolors
 set ignorecase
 let g:loaded_ruby_provider = 0
 set background=dark
-colorscheme edge
-let g:edge_style = 'neon'
-let g:edge_enable_italic = 1
-let g:edge_disable_italic_comment = 1
+colorscheme nightfly
 
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
 	syntax on
@@ -247,7 +243,7 @@ function! LightLineFilename()
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'edge',
+      \ 'colorscheme': 'darcula',
       \ 'active': {
       \   'left': [ ['fileicon'], [ 'filename' ] ],
       \   'right': [ [ 'icongitbranch' ], [ 'lineinfo' ] ]
