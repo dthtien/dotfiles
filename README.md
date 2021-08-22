@@ -1,4 +1,4 @@
-# Work space setup
+# Workspace setup
 - [x] [Nvim](./nvim/README.md)
 - [x] [Alacritty](./alacritty/README.md)
 - [x] [Tmux](https://github.com/tmux/tmux/wiki/Installing)
