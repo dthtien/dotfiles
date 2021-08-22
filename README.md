@@ -4,4 +4,4 @@
 - [x] Tmux
 
 
-![](./images/photo.png)
+<kbd>![](./images/photo.png)</kbd>
