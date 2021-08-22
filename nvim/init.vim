@@ -4,19 +4,17 @@ Plug 'tpope/vim-sensible'
 " Some Git stuff
 Plug 'tpope/vim-fugitive'
 " Language support things
-Plug 'sheerun/vim-polyglot'
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ap/vim-css-color'
 " LSP support
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
+Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
 " Fancy UI stuff
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'itchyny/lightline.vim'
-Plug 'bluz71/vim-nightfly-colors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Moving around easier
 Plug 'easymotion/vim-easymotion'
