@@ -10,6 +10,7 @@ Plug 'ap/vim-css-color'
 " LSP support
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
+Plug 'mxw/vim-jsx'
 " Fancy UI stuff
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
@@ -30,7 +31,8 @@ Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vim-which-key'
-" Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-projectionist'
+Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
 call plug#end()
 
@@ -44,7 +46,6 @@ filetype plugin indent on
 
 " Auto remove trailing spaces
 autocmd BufWritePre * %s/\s\+$//e
-let g:polyglot_disabled = ['ruby']
 
 set encoding=UTF-8
 set hidden
@@ -61,8 +62,8 @@ set foldmethod=indent
 set foldlevel=99
 
 let g:is_posix = 1
-" let g:indentLine_char = '▏'
-" let g:indentLine_color_gui = '#302f2f'
+let g:indentLine_char = '▏'
+let g:indentLine_color_gui = '#302f2f'
 
 set noswapfile
 set nojoinspaces
@@ -174,8 +175,16 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " RSpec.vim setting
 function! CallRspecWithCurrentFile()
-  let scommand = 'bundle exec rspec ' . expand("%")
-  execute '!'.scommand
+  let fileType = &filetype
+  if fileType == 'ruby'
+    let scommand = 'bundle exec rspec ' . expand("%")
+    execute '!'.scommand
+  elseif fileType == 'go'
+    let scommand = 'go test -v'
+    execute '!'.scommand
+  else
+    echo 'File ' . fileType . ' not support!'
+  endif
 endfunction
 
 function! CallRspecWithTag()
@@ -187,6 +196,13 @@ endfunction
 
 map <Leader>rt :call CallRspecWithCurrentFile()<CR>
 map <Leader>rwt :call CallRspecWithTag()<CR>
+" Go
+function! ExecuteGoCurrentFile()
+  let scommand = 'go run ' . expand("%")
+  execute '!'.scommand
+endfunction
+
+nnoremap <leader>E :call ExecuteGoCurrentFile()<CR>
 
 map <Leader>gd :Git diff<CR>
 map <Leader>gw :Gwrite<CR>
@@ -268,13 +284,13 @@ set shortmess+=c
 set signcolumn=yes
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <leader>H :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
-    execute 'lua vim.lsp.buf.hover()<CR>'
+    execute 'lua vim.lsp.buf.hover()'
   endif
 endfunction
 
@@ -289,6 +305,7 @@ nnoremap <silent> <Leader>p :FZF<CR>
 nnoremap <silent> <Leader>h :History<CR>
 nnoremap <silent> <Leader>F :GFiles<CR>
 nnoremap <silent> <Leader>m :Marks<CR>
+nnoremap <silent> <Leader>a :A<CR>
 nmap <Leader>S *:%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Auto change root of the project
@@ -410,3 +427,4 @@ let g:nvim_tree_icons = {
 
 " a list of groups can be found at `:help nvim_tree_highlight`
 highlight NvimTreeFolderIcon guibg=blue
+
