@@ -188,10 +188,21 @@ function! CallRspecWithCurrentFile()
 endfunction
 
 function! CallRspecWithTag()
+  let fileType = &filetype
   let rtag = input('Input tag: ')
-  let scommand = 'bundle exec rspec --tag=' . rtag
-  call inputrestore()
-  execute '!'.scommand
+
+  if fileType == 'ruby'
+    let scommand = 'bundle exec rspec --tag=' . rtag
+    call inputrestore()
+    execute '!'.scommand
+  elseif fileType == 'go'
+    let scommand = 'go test -run ' . rtag
+    call inputrestore()
+    execute '!'.scommand
+  else
+    call inputrestore()
+    echo 'File ' . fileType . ' not support!'
+  end
 endfunction
 
 map <Leader>rt :call CallRspecWithCurrentFile()<CR>
@@ -301,7 +312,7 @@ nmap <silent> ;l <Plug>(easymotion-overwin-line)
 nnoremap <silent> <Leader>s :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>sa :Ag<CR>
 nnoremap <silent> <Leader>P  :FZF <C-R><C-W><CR>
-nnoremap <silent> <Leader>p :FZF<CR>
+nnoremap <silent> <Leader>p :Files<CR>
 nnoremap <silent> <Leader>h :History<CR>
 nnoremap <silent> <Leader>F :GFiles<CR>
 nnoremap <silent> <Leader>m :Marks<CR>
@@ -324,22 +335,14 @@ highlight WildMenu guibg=NONE guifg=#87bb7c
 highlight CursorLineNr guibg=NONE
 
 " fzf
+
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+let g:fzf_layout = { 'down':  '40%' }
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 let g:nvim_tree_side = 'right' "left by default
 let g:nvim_tree_width = 40 "30 by default, can be width_in_columns or 'width_in_percent%'
