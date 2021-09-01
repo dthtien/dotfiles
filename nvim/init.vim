@@ -99,10 +99,10 @@ set smartindent
 
 " Persistent undo
 " Don't forget mkdir folder $HOME/.vim/undo
-" set undofile
-" set undodir=$HOME/.config/nvim/undo
-" set undolevels=1000
-" set undoreload=10000
+set undofile
+set undodir=$HOME/.config/nvim/undo
+set undolevels=1000
+set undoreload=10000
 
 let g:NERDSpaceDelims = 1
 map mm <Plug>NERDCommenterToggle
