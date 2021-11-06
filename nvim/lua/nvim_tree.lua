@@ -1,10 +1,10 @@
 require'nvim-tree'.setup {
   disable_netrw       = true,
   hijack_netrw        = true,
-  open_on_setup       = false,
+  open_on_setup       = true,
   ignore_ft_on_setup  = {},
   auto_close          = false,
-  open_on_tab         = false,
+  open_on_tab         = true,
   update_to_buf_dir   = {
     enable = true,
     auto_open = true,
@@ -12,12 +12,12 @@ require'nvim-tree'.setup {
   hijack_cursor       = true,
   update_cwd          = false,
   diagnostics = {
-    enable = false,
+    enable = true,
     icons = {
-      hint = "",
-      info = "",
+      hint = "",
+      info = "",
       warning = "",
-      error = "",
+      error = "",
     }
   },
   update_focused_file = {
