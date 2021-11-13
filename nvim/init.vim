@@ -35,6 +35,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
 Plug 'github/copilot.vim'
+Plug 'iamcco/markdown-preview.nvim'
 call plug#end()
 
 lua require("lsp_config")
@@ -409,3 +410,6 @@ let g:nvim_tree_icons = {
 
 highlight NvimTreeFolderIcon guibg=blue
 
+" MarkdownPreviewer
+
+nmap <C-v> <Plug>MarkdownPreview
