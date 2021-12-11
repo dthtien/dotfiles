@@ -9,7 +9,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'ap/vim-css-color'
 " LSP support
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'mxw/vim-jsx'
 " Fancy UI stuff
 Plug 'ryanoasis/vim-devicons'
@@ -34,7 +34,7 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-projectionist'
 Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
-Plug 'github/copilot.vim'
+Plug 'github/copilot.vim', { 'branch': 'release' }
 Plug 'iamcco/markdown-preview.nvim'
 call plug#end()
 
@@ -60,6 +60,7 @@ set pumblend=20
 set cursorline
 set colorcolumn=80
 set number relativenumber
+set wrap
 
 set foldmethod=indent
 set foldlevel=99
@@ -79,6 +80,7 @@ set termguicolors
 set ignorecase
 let g:loaded_ruby_provider = 0
 set background=dark
+set textwidth=120
 colorscheme nightfly
 
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -180,7 +182,7 @@ vnoremap K :m '<-2<CR>gv=gv
 function! CallRspecWithCurrentFile()
   let fileType = &filetype
   if fileType == 'ruby'
-    let scommand = 'bundle exec rspec ' . expand("%")
+    let scommand = 'bin/rspec ' . expand("%")
     execute '!'.scommand
   elseif fileType == 'go'
     let scommand = 'go test -v'

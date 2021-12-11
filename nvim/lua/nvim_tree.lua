@@ -29,7 +29,6 @@ require'nvim-tree'.setup {
     cmd  = nil,
     args = {}
   },
-
   view = {
     width = 40,
     height = 30,

@@ -1,7 +1,6 @@
 local nvim_lsp = require('lspconfig')
 local nvim_command = vim.api.nvim_command
-require'lspinstall'.setup()
-local servers = require'lspinstall'.installed_servers()
+local lsp_installer = require("nvim-lsp-installer")
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -40,14 +39,24 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- local servers = { "solargraph", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+-- for _, lsp in ipairs(servers) do
+  -- nvim_lsp[lsp].setup {
+    -- on_attach = on_attach,
+    -- flags = {
+      -- debounce_text_changes = 150,
+    -- }
+  -- }
+-- end
+lsp_installer.on_server_ready(function(server)
+  local opts = {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     }
   }
-end
+
+    server:setup(opts)
+end)
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
