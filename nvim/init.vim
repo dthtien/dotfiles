@@ -36,6 +36,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
 Plug 'github/copilot.vim', { 'branch': 'release' }
 Plug 'iamcco/markdown-preview.nvim'
+Plug 'sbdchd/neoformat'
 call plug#end()
 
 lua require("lsp_config")
@@ -182,7 +183,7 @@ vnoremap K :m '<-2<CR>gv=gv
 function! CallRspecWithCurrentFile()
   let fileType = &filetype
   if fileType == 'ruby'
-    let scommand = 'bin/rspec ' . expand("%")
+    let scommand = 'bundle exec rspec ' . expand("%")
     execute '!'.scommand
   elseif fileType == 'go'
     let scommand = 'go test -v'
@@ -415,3 +416,5 @@ highlight NvimTreeFolderIcon guibg=blue
 " MarkdownPreviewer
 
 nmap <C-v> <Plug>MarkdownPreview
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre *.js Neoformat
