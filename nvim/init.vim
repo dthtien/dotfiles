@@ -11,6 +11,7 @@ Plug 'ap/vim-css-color'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'mxw/vim-jsx'
+Plug 'sbdchd/neoformat'
 " Fancy UI stuff
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
@@ -36,7 +37,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
 Plug 'github/copilot.vim', { 'branch': 'release' }
 Plug 'iamcco/markdown-preview.nvim'
-Plug 'sbdchd/neoformat'
 call plug#end()
 
 lua require("lsp_config")
@@ -187,6 +187,9 @@ function! CallRspecWithCurrentFile()
     execute '!'.scommand
   elseif fileType == 'go'
     let scommand = 'go test -v'
+    execute '!'.scommand
+  elseif fileType == 'javascript.jsx'
+    let scommand = 'yarn test ' . expand("%")
     execute '!'.scommand
   else
     echo 'File ' . fileType . ' not support!'
