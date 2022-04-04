@@ -232,6 +232,7 @@ map <Leader>gr :Gread<CR>
 map <Leader>gs :Gstatus<CR>
 " File path
 map <Leader>fp :let @+ = expand("%")<CR>
+map <leader>fm :Neoformat<CR>
 
 " Turn off whitespaces compare and folding in vimdiff
 set splitright
@@ -420,4 +421,3 @@ highlight NvimTreeFolderIcon guibg=blue
 
 nmap <C-v> <Plug>MarkdownPreview
 let g:neoformat_try_node_exe = 1
-autocmd BufWritePre *.js Neoformat
