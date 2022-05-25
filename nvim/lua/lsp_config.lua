@@ -1,6 +1,6 @@
 local nvim_lsp = require('lspconfig')
 local nvim_command = vim.api.nvim_command
-local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer = require("nvim-lsp-installer").setup()
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -16,8 +16,8 @@ local on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>zz', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>zz', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -38,25 +38,34 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
--- local servers = { "solargraph", "tsserver" }
--- for _, lsp in ipairs(servers) do
-  -- nvim_lsp[lsp].setup {
-    -- on_attach = on_attach,
-    -- flags = {
-      -- debounce_text_changes = 150,
-    -- }
-  -- }
--- end
-lsp_installer.on_server_ready(function(server)
-  local opts = {
+local servers = { "tsserver", "solargraph", "rescriptls", "tailwindcss" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     }
   }
+end
 
-    server:setup(opts)
-end)
+-- nvim_lsp.solargraph.setup {
+  -- -- root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
+  -- on_attach = on_attach,
+  -- flags = {
+    -- debounce_text_changes = 150,
+  -- }
+-- }
+
+-- lsp_installer.on_server_ready(function(server)
+  -- local opts = {
+    -- on_attach = on_attach,
+    -- flags = {
+      -- debounce_text_changes = 150,
+    -- }
+  -- }
+
+    -- server:setup(opts)
+-- end)
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {

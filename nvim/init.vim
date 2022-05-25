@@ -12,6 +12,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
+Plug 'rescript-lang/vim-rescript'
+Plug 'nkrkv/nvim-treesitter-rescript'
 " Fancy UI stuff
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
@@ -56,6 +58,7 @@ set hidden
 set nobackup
 set nowritebackup
 set mouse=a " enable mouse for all mode
+set completeopt=menu,menuone
 set wildoptions=pum
 set pumblend=20
 set cursorline
@@ -250,7 +253,7 @@ function! DeleteCurrentFileAndBuffer()
 endfunction
 
 function! DrawGitBranchInfo()
-  let branch = fugitive#head()
+  let branch = fugitive#Head()
   return len(branch) > 0 ? " " . branch : ""
 endfunction
 
