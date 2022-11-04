@@ -13,7 +13,6 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
 Plug 'rescript-lang/vim-rescript'
-Plug 'nkrkv/nvim-treesitter-rescript'
 " Fancy UI stuff
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
@@ -52,6 +51,7 @@ filetype plugin indent on
 
 " Auto remove trailing spaces
 autocmd BufWritePre * %s/\s\+$//e
+autocmd BufNewFile,BufRead *.jbuilder set ft=ruby
 
 set encoding=UTF-8
 set hidden
@@ -424,3 +424,8 @@ highlight NvimTreeFolderIcon guibg=blue
 
 nmap <C-v> <Plug>MarkdownPreview
 let g:neoformat_try_node_exe = 1
+" Disable quote concealing in JSON files
+let g:vim_json_conceal=0
+autocmd Filetype json
+  \ let g:indentLine_setConceal = 0 |
+  \ let g:vim_json_syntax_conceal = 0
