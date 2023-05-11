@@ -36,8 +36,9 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-projectionist'
 Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
-Plug 'github/copilot.vim', { 'branch': 'release' }
+" Plug 'github/copilot.vim', { 'branch': 'release' }
 Plug 'iamcco/markdown-preview.nvim'
+Plug 'Exafunction/codeium.vim'
 call plug#end()
 
 lua require("lsp_config")
