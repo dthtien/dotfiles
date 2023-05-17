@@ -1,9 +1,35 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-local servers = { "tsserver", "solargraph", "rescriptls", "tailwindcss", 'gopls', 'vuels' }
+local servers = { "tsserver", "solargraph", "rescriptls", "tailwindcss", 'gopls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end
+
+local util = require 'lspconfig.util'
+local function get_typescript_server_path(root_dir)
+
+  local global_ts = ' /Users/dthtien/.nvm/versions/node/v18.15.0/lib/node_modules/typescript/lib'
+  -- Alternative location if installed as root:
+  -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
+  local found_ts = ''
+  local function check_dir(path)
+    found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib')
+    if util.path.exists(found_ts) then
+      return path
+    end
+  end
+  if util.search_ancestors(root_dir, check_dir) then
+    return found_ts
+  else
+    return global_ts
+  end
+end
+
+require'lspconfig'.volar.setup{
+  on_new_config = function(new_config, new_root_dir)
+    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+  end,
+}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
