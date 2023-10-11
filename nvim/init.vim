@@ -9,7 +9,6 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'ap/vim-css-color'
 " LSP support
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
 Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
 Plug 'rescript-lang/vim-rescript'

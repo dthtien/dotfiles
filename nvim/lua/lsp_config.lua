@@ -1,6 +1,6 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-local servers = { "tsserver", "solargraph", "rescriptls", "tailwindcss", 'gopls' }
+local servers = { "tsserver", "solargraph", "rescriptls", "tailwindcss", 'gopls', 'tflint' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end
@@ -8,7 +8,8 @@ end
 local util = require 'lspconfig.util'
 local function get_typescript_server_path(root_dir)
 
-  local global_ts = ' /Users/dthtien/.nvm/versions/node/v18.15.0/lib/node_modules/typescript/lib'
+  local global_ts = '/Users/dthtien/.nvm/versions/node/v20.4.0/bin/node'
+
   -- Alternative location if installed as root:
   -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
   local found_ts = ''
