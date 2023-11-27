@@ -7,6 +7,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ap/vim-css-color'
+" Rust
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+
 " LSP support
 Plug 'neovim/nvim-lspconfig'
 Plug 'mxw/vim-jsx'
@@ -38,6 +42,15 @@ Plug 'Galooshi/vim-import-js'
 " Plug 'github/copilot.vim', { 'branch': 'release' }
 Plug 'iamcco/markdown-preview.nvim'
 Plug 'Exafunction/codeium.vim'
+" Using vim-plug
+Plug 'sourcegraph/sg.nvim', { 'do': 'nvim -l build/init.lua' }
+
+" Required for various utilities
+Plug 'nvim-lua/plenary.nvim'
+
+" Required if you want to use some of the search functionality
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
 lua require("lsp_config")
@@ -177,6 +190,7 @@ nnoremap <Leader>tp :tabp<CR>
 nnoremap <Leader>tc :tabe<CR>
 nnoremap <Leader>tx :tabclose<CR>
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <space>ss <cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>
 
 " Moving text
 vnoremap J :m '>+1<CR>gv=gv
