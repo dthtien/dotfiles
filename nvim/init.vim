@@ -8,8 +8,7 @@ Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ap/vim-css-color'
 " Rust
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'simrat39/rust-tools.nvim'
 
 " LSP support
 Plug 'neovim/nvim-lspconfig'
@@ -39,9 +38,9 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-projectionist'
 Plug 'Yggdroot/indentLine'
 Plug 'Galooshi/vim-import-js'
-" Plug 'github/copilot.vim', { 'branch': 'release' }
+Plug 'github/copilot.vim', { 'branch': 'release' }
 Plug 'iamcco/markdown-preview.nvim'
-Plug 'Exafunction/codeium.vim'
+" Plug 'Exafunction/codeium.vim'
 " Using vim-plug
 Plug 'sourcegraph/sg.nvim', { 'do': 'nvim -l build/init.lua' }
 
