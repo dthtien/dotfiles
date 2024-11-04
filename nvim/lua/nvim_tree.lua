@@ -53,18 +53,18 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
   update_cwd = false,
   view = {
     width = 40,
-    hide_root_folder = false,
+    -- hide_root_folder = false,
     side = "right",
     preserve_window_proportions = false,
     number = false,
     relativenumber = false,
     signcolumn = "yes",
-    mappings = {
-      custom_only = false,
-      list = {
-        -- user mappings go here
-      },
-    },
+    -- mappings = {
+      -- custom_only = false,
+      -- list = {
+        -- -- user mappings go here
+      -- },
+    -- },
   },
   renderer = {
     indent_markers = {

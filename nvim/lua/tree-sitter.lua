@@ -17,6 +17,7 @@ require'nvim-treesitter.configs'.setup {
     "yaml",
     "html",
     "lua",
-    "vim"
+    "vim",
+    "sql"
   },
 }
