@@ -32,12 +32,13 @@ local opts = {
     },
   },
 }
+
 require("rust-tools").setup(opts)
 
 local util = require 'lspconfig.util'
 local function get_typescript_server_path(root_dir)
 
-  local global_ts = '/Users/dthtien/.nvm/versions/node/v20.4.0/bin/node'
+  local global_ts = '/Users/dthtien/.nvm/versions/node/v20.12.2/bin/node'
 
   -- Alternative location if installed as root:
   -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
@@ -75,6 +76,12 @@ vim.diagnostic.config({
   virtual_text = false
 })
 
+vim.g.copilot_filetypes = {
+  yaml = true,
+  yml = true,
+  markdown = true
+}
+
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 250
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
@@ -104,5 +111,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>F', function()
       vim.lsp.buf.format { async = true }
     end, opts)
+  end,
+})
+
+lspconfig.terraformls.setup{}
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  pattern = {"*.tf", "*.tfvars"},
+  callback = function()
+    vim.lsp.buf.format()
   end,
 })
