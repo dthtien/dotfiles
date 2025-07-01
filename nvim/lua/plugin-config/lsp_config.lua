@@ -1,6 +1,6 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-local servers = { "tsserver", "solargraph", "rescriptls", "tailwindcss", 'gopls', 'tflint' }
+local servers = { "ts_ls", "solargraph", "rescriptls", "tailwindcss", 'gopls', 'tflint' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end

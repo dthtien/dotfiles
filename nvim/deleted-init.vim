@@ -1,61 +1,58 @@
-call plug#begin()
-" init setup
-Plug 'tpope/vim-sensible'
-" Some Git stuff
-Plug 'tpope/vim-fugitive'
-" Language support things
-Plug 'othree/html5.vim'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'ap/vim-css-color'
-" Rust
-Plug 'simrat39/rust-tools.nvim'
+" call plug#begin()
+" " init setup
+" Plug 'tpope/vim-sensible'
+" " Some Git stuff
+" Plug 'tpope/vim-fugitive'
+" " Language support things
+" Plug 'othree/html5.vim'
+" Plug 'cakebaker/scss-syntax.vim'
+" Plug 'ap/vim-css-color'
+" " Rust
+" Plug 'simrat39/rust-tools.nvim'
 
-" LSP support
-Plug 'neovim/nvim-lspconfig'
-Plug 'mxw/vim-jsx'
-Plug 'sbdchd/neoformat'
-Plug 'rescript-lang/vim-rescript'
-" Fancy UI stuff
-Plug 'ryanoasis/vim-devicons'
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'itchyny/lightline.vim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Moving around easier
-Plug 'easymotion/vim-easymotion'
-" Improving editing experience
-Plug 'hrsh7th/nvim-compe'
-Plug 'vim-scripts/matchit.zip'
-Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
-Plug 'haya14busa/incsearch.vim'
-Plug 'tpope/vim-abolish' " For case perserved subtitue :%S
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-repeat'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'liuchengxu/vim-which-key'
-Plug 'tpope/vim-projectionist'
-Plug 'Yggdroot/indentLine'
-Plug 'Galooshi/vim-import-js'
-Plug 'github/copilot.vim', { 'branch': 'release' }
-Plug 'iamcco/markdown-preview.nvim'
-" Plug 'Exafunction/codeium.vim'
-" Using vim-plug
-Plug 'sourcegraph/sg.nvim', { 'do': 'nvim -l build/init.lua' }
+" " LSP support
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'mxw/vim-jsx'
+" Plug 'sbdchd/neoformat'
+" Plug 'rescript-lang/vim-rescript'
+" " Fancy UI stuff
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'kyazdani42/nvim-web-devicons' " for file icons
+" Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'itchyny/lightline.vim'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" " Moving around easier
+" Plug 'easymotion/vim-easymotion'
+" " Improving editing experience
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'vim-scripts/matchit.zip'
+" Plug 'tpope/vim-surround'
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'haya14busa/incsearch.vim'
+" Plug 'tpope/vim-abolish' " For case perserved subtitue :%S
+" Plug 'scrooloose/nerdcommenter'
+" Plug 'tpope/vim-repeat'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
+" Plug 'liuchengxu/vim-which-key'
+" Plug 'tpope/vim-projectionist'
+" Plug 'Yggdroot/indentLine'
+" Plug 'Galooshi/vim-import-js'
+" " Plug 'github/copilot.vim', { 'branch': 'release' }
+" Plug 'iamcco/markdown-preview.nvim'
+" " Using vim-plug
+" Plug 'sourcegraph/sg.nvim', { 'do': 'nvim -l build/init.lua' }
+" Plug 'augmentcode/augment.vim'
 
-" Required for various utilities
-Plug 'nvim-lua/plenary.nvim'
+" " Required for various utilities
 
-" Required if you want to use some of the search functionality
-Plug 'nvim-telescope/telescope.nvim'
+" " Required if you want to use some of the search functionality
+" Plug 'nvim-telescope/telescope.nvim'
 
-call plug#end()
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'CopilotC-Nvim/CopilotChat.nvim'
 
-lua require("lsp_config")
-lua require("complete")
-lua require("tree-sitter")
-lua require("nvim_tree")
+" call plug#end()
 
 highlight link CompeDocumentation NormalFloat
 
@@ -71,7 +68,7 @@ set nobackup
 set nowritebackup
 set mouse=a " enable mouse for all mode
 set completeopt=menu,menuone
-set wildoptions=pum
+" set wildoptions=pum
 set pumblend=20
 set cursorline
 set colorcolumn=80
@@ -187,6 +184,10 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <Leader>tn :tabn<CR>
 nnoremap <Leader>tp :tabp<CR>
 nnoremap <Leader>tc :tabe<CR>
+nnoremap <Leader>oc :CopilotChatOpen<CR>
+vnoremap <leader>ac :Augment chat<CR>
+nnoremap <leader>an :Augment chat-new<CR>
+nnoremap <leader>at :Augment chat-toggle<CR>
 nnoremap <Leader>tx :tabclose<CR>
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <space>ss <cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>
@@ -436,9 +437,16 @@ highlight NvimTreeFolderIcon guibg=blue
 " MarkdownPreviewer
 
 nmap <C-v> <Plug>MarkdownPreview
+
 let g:neoformat_try_node_exe = 1
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
 autocmd Filetype json
   \ let g:indentLine_setConceal = 0 |
   \ let g:vim_json_syntax_conceal = 0
+
+lua << EOF
+require("CopilotChat").setup {
+  -- See Configuration section for options
+}
+EOF
