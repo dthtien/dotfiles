@@ -1,104 +1,113 @@
--- packer.nvim plugin setup
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+return {
+  -- Sensible defaults
+  { "tpope/vim-sensible" },
 
-  -- init setup
-  use 'tpope/vim-sensible'
-
-  -- Git stuff
-  use 'tpope/vim-fugitive'
+  -- Git
+  { "tpope/vim-fugitive" },
 
   -- Language support
-  use 'othree/html5.vim'
-  use 'cakebaker/scss-syntax.vim'
-  use 'ap/vim-css-color'
+  { "othree/html5.vim" },
+  { "cakebaker/scss-syntax.vim" },
+  { "ap/vim-css-color" },
 
   -- Rust
-  use 'simrat39/rust-tools.nvim'
+  { "simrat39/rust-tools.nvim" },
 
-  -- LSP support
-  use 'neovim/nvim-lspconfig'
-  use 'mxw/vim-jsx'
-  use 'sbdchd/neoformat'
-  use 'rescript-lang/vim-rescript'
+  -- LSP
+  { "neovim/nvim-lspconfig" },
+  { "mxw/vim-jsx" },
+  { "sbdchd/neoformat" },
+  { "rescript-lang/vim-rescript" },
 
-  -- Fancy UI stuff
-  use 'ryanoasis/vim-devicons'
-  use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
-  use 'itchyny/lightline.vim'
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
+  -- UI
+  { "ryanoasis/vim-devicons" },
+  { "kyazdani42/nvim-web-devicons" },
+  { "kyazdani42/nvim-tree.lua" },
+  { "itchyny/lightline.vim" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate"
+  },
 
   -- Navigation
-  use 'easymotion/vim-easymotion'
+  { "easymotion/vim-easymotion" },
 
   -- Editing experience
-  use 'hrsh7th/nvim-compe'
-  use 'vim-scripts/matchit.zip'
-  use 'tpope/vim-surround'
-  use 'jiangmiao/auto-pairs'
-  use 'haya14busa/incsearch.vim'
-  use 'tpope/vim-abolish'
-  use 'scrooloose/nerdcommenter'
-  use 'tpope/vim-repeat'
+  { "hrsh7th/nvim-compe" },
+  { "vim-scripts/matchit.zip" },
+  { "tpope/vim-surround" },
+  { "jiangmiao/auto-pairs" },
+  { "haya14busa/incsearch.vim" },
+  { "tpope/vim-abolish" },
+  { "scrooloose/nerdcommenter" },
+  { "tpope/vim-repeat" },
 
-  -- FZF and search
-  use {
-    'junegunn/fzf',
-    run = function()
-      vim.fn['fzf#install']()
+  -- FZF
+  {
+    "junegunn/fzf",
+    build = function()
+      vim.fn["fzf#install"]()
     end
-  }
-  use 'junegunn/fzf.vim'
+  },
+  { "junegunn/fzf.vim" },
 
   -- Keybinding helper
-  use 'liuchengxu/vim-which-key'
+  { "liuchengxu/vim-which-key" },
 
-  -- Project support
-  use 'tpope/vim-projectionist'
+  -- Project structure
+  { "tpope/vim-projectionist" },
 
   -- Indentation
-  use 'Yggdroot/indentLine'
+  { "Yggdroot/indentLine" },
 
-  -- JavaScript Import Helper
-  use 'Galooshi/vim-import-js'
+  -- JS import
+  { "Galooshi/vim-import-js" },
 
   -- Markdown Preview
-  use { 'iamcco/markdown-preview.nvim', run = 'cd app && npm install' }
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    ft = { "markdown" }
+  },
 
-  -- Sourcegraph integration
-  use {
-    'sourcegraph/sg.nvim',
-    run = 'nvim -l build/init.lua'
-  }
+  -- Sourcegraph
+  {
+    "sourcegraph/sg.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
+  },
 
   -- Augment
-  use 'augmentcode/augment.vim'
+  -- { "augmentcode/augment.vim" },
 
-  -- Telescope and dependencies
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-lua/plenary.nvim'
+  -- Telescope
+  { "nvim-telescope/telescope.nvim" },
+  { "nvim-lua/plenary.nvim" },
 
-  -- Copilot Chat
-  -- use 'CopilotC-Nvim/CopilotChat.nvim'
+  -- Optional Copilot Chat
+  -- { "CopilotC-Nvim/CopilotChat.nvim" },
+  { "github/copilot.vim", branch = "release" },
 
-  -- Uncomment this to enable Copilot
-  -- use { 'github/copilot.vim', branch = 'release' }
-  -- Packer
-  use({
+  -- ChatGPT.nvim
+  {
     "jackMort/ChatGPT.nvim",
-    config = function()
-      require("chatgpt").setup()
-    end,
-    requires = {
+    dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
       "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim"
-    }
-  })
-end)
+    },
+    config = function()
+      require("chatgpt").setup()
+    end
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    opts = function(_, opts)
+      local cmp = require("cmp")
+      opts.mapping = vim.tbl_extend("force", opts.mapping or {}, {
+        ["<C-Space>"] = cmp.mapping.complete(),
+      })
+    end,
+  }
+}

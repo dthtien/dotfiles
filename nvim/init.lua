@@ -1,12 +1,25 @@
 -- Load custom Lua modules
-require("plugins")
+-- Install lazy.nvim if not already installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
 require("keymaps")
+require("lazy").setup("plugins")
 require("functions")
 require("lightline")
 require("statusline")
 require("autocmds")
 require("plugin-config.lsp_config")
-require("plugin-config.complete")
+-- require("plugin-config.complete")
 require("plugin-config.tree-sitter")
 require("plugin-config.nvim_tree")
 
