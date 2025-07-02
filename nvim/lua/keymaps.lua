@@ -65,11 +65,8 @@ map("n", "<leader>tp", ":tabp<CR>", opts)
 map("n", "<leader>tc", ":tabe<CR>", opts)
 map("n", "<leader>tx", ":tabclose<CR>", opts)
 
--- Copilot & Augment
-map("n", "<leader>oc", ":CopilotChatOpen<CR>", opts)
-map("v", "<leader>ac", ":Augment chat<CR>", opts)
-map("n", "<leader>an", ":Augment chat-new<CR>", opts)
-map("n", "<leader>at", ":Augment chat-toggle<CR>", opts)
+-- ChatGPT
+map("n", "<leader>oc", ":ChatGPT<CR>", opts)
 
 -- WhichKey
 map("n", "<leader>", ":WhichKey '<Space>'<CR>", { noremap = true })

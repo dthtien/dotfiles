@@ -1,8 +1,11 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 local servers = { "ts_ls", "solargraph", "rescriptls", "tailwindcss", 'gopls', 'tflint' }
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {}
+  lspconfig[lsp].setup {
+    capabilities = capabilities
+  }
 end
 local opts = {
   tools = {
