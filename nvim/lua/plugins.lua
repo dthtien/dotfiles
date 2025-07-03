@@ -33,7 +33,6 @@ return {
   { "easymotion/vim-easymotion" },
 
   -- Editing experience
-  { "hrsh7th/nvim-compe" },
   { "vim-scripts/matchit.zip" },
   { "tpope/vim-surround" },
   { "jiangmiao/auto-pairs" },
@@ -52,25 +51,25 @@ return {
   { "junegunn/fzf.vim" },
 
   -- Keybinding helper
-  { "liuchengxu/vim-which-key" },
-  -- {
-    -- "folke/which-key.nvim",
-    -- event = "VeryLazy",
-    -- opts = {
-      -- -- your configuration comes here
-      -- -- or leave it empty to use the default settings
-      -- -- refer to the configuration section below
-    -- },
-    -- keys = {
-      -- {
-        -- "<leader>?",
-        -- function()
-          -- require("which-key").show({ global = false })
-        -- end,
-        -- desc = "Buffer Local Keymaps (which-key)",
-      -- },
-    -- },
-  -- },
+  -- { "liuchengxu/vim-which-key" },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    keys = {
+      {
+        "<leader><Space>",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
 
   -- Project structure
   { "tpope/vim-projectionist" },
@@ -89,10 +88,10 @@ return {
   },
 
   -- Sourcegraph
-  {
-    "sourcegraph/sg.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
-  },
+  -- {
+    -- "sourcegraph/sg.nvim",
+    -- dependencies = { "nvim-lua/plenary.nvim", [> "nvim-telescope/telescope.nvim <] },
+  -- },
 
   -- Augment
   -- { "augmentcode/augment.vim" },

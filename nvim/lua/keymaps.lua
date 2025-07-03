@@ -69,7 +69,7 @@ map("n", "<leader>tx", ":tabclose<CR>", opts)
 map("n", "<leader>oc", ":ChatGPT<CR>", opts)
 
 -- WhichKey
-map("n", "<leader>", ":WhichKey '<Space>'<CR>", { noremap = true })
+-- map("n", "<leader>", ":WhichKey '<Space>'<CR>", { noremap = true })
 map("n", "<space>ss", "<cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>", opts)
 
 -- Move lines
