@@ -8,6 +8,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 local opts = {
+  capabilities = capabilities,
   tools = {
     inlay_hints = {
       auto = true,
@@ -60,6 +61,7 @@ local function get_typescript_server_path(root_dir)
 end
 
 require'lspconfig'.volar.setup{
+  capabilities = capabilities,
   on_new_config = function(new_config, new_root_dir)
     new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
   end,
@@ -113,7 +115,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-lspconfig.terraformls.setup{}
+lspconfig.terraformls.setup{
+  capabilities = capabilities
+}
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
   pattern = {"*.tf", "*.tfvars"},
   callback = function()

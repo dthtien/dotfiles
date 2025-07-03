@@ -83,8 +83,9 @@ return {
   -- Markdown Preview
   {
     "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    ft = { "markdown" }
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
   },
 
   -- Sourcegraph
@@ -101,7 +102,6 @@ return {
   { "nvim-lua/plenary.nvim" },
 
   -- Optional Copilot Chat
-  -- { "CopilotC-Nvim/CopilotChat.nvim" },
   { "github/copilot.vim", branch = "release" },
 
   -- ChatGPT.nvim

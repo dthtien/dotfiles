@@ -18,6 +18,7 @@ require'nvim-treesitter.configs'.setup {
     "html",
     "lua",
     "vim",
-    "sql"
+    "sql",
+    "query"
   },
 }
