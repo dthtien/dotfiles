@@ -68,10 +68,6 @@ map("n", "<leader>tx", ":tabclose<CR>", opts)
 -- ChatGPT
 map("n", "<leader>oc", ":ChatGPT<CR>", opts)
 
--- WhichKey
--- map("n", "<leader>", ":WhichKey '<Space>'<CR>", { noremap = true })
-map("n", "<space>ss", "<cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>", opts)
-
 -- Move lines
 map("v", "J", ":m '>+1<CR>gv=gv", opts)
 map("v", "K", ":m '<-2<CR>gv=gv", opts)
@@ -95,14 +91,14 @@ map("n", "<leader>2", ":diffget 2<CR>:diffupdate<CR>", opts)
 -- Markdown preview
 map("n", "<C-v>", "<Plug>MarkdownPreview", {})
 
--- FZF, Ag
-map("n", "<leader>s", ":Ag <C-R><C-W><CR>", opts)
-map("n", "<leader>sa", ":Ag<CR>", opts)
-map("n", "<leader>P", ":FZF <C-R><C-W><CR>", opts)
-map("n", "<leader>p", ":Files<CR>", opts)
-map("n", "<leader>h", ":History<CR>", opts)
-map("n", "<leader>F", ":GFiles<CR>", opts)
-map("n", "<leader>m", ":Marks<CR>", opts)
+-- Telescope
+map("n", "<leader>s", [[<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>") })<CR>]], opts)
+map("n", "<leader>sa", ":Telescope live_grep<CR>", opts)
+map("n", "<leader>p", ":Telescope find_files<CR>", opts)
+map("n", "<leader>h", ":Telescope oldfiles<CR>", opts)                         -- History
+map("n", "<leader>F", ":Telescope git_files<CR>", opts)                        -- GFiles
+map("n", "<leader>m", ":Telescope marks<CR>", opts)                            -- Marks
+map("n", "<leader>P", [[<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>") })<CR>]], opts)
 map("n", "<leader>a", ":A<CR>", opts)
 map("n", "<leader>S", "*:%s/\\<<C-r><C-w>\\>//g<Left><Left>", opts)
 
