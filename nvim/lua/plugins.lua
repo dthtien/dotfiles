@@ -42,19 +42,23 @@ return {
   { "tpope/vim-repeat" },
 
   -- FZF
-  {
-    "junegunn/fzf",
-    build = function()
-      vim.fn["fzf#install"]()
-    end
-  },
-  { "junegunn/fzf.vim" },
+  -- {
+    -- "junegunn/fzf",
+    -- build = function()
+      -- vim.fn["fzf#install"]()
+    -- end
+  -- },
+  -- { "junegunn/fzf.vim" },
 
   -- Keybinding helper
   -- { "liuchengxu/vim-which-key" },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    triggers_blacklist = {
+      n = { "/" }, -- normal mode
+      v = { "/" }, -- visual mode
+    },
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
