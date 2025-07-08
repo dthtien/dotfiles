@@ -21,8 +21,21 @@ return {
 
   -- UI
   { "ryanoasis/vim-devicons" },
-  { "kyazdani42/nvim-web-devicons" },
-  { "kyazdani42/nvim-tree.lua" },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
+  { 'echasnovski/mini.nvim', version = '*' },
+  -- { "kyazdani42/nvim-web-devicons" },
+  -- { "kyazdani42/nvim-tree.lua" },
   { "itchyny/lightline.vim" },
   {
     "nvim-treesitter/nvim-treesitter",
