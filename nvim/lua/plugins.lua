@@ -120,20 +120,29 @@ return {
 
   -- Optional Copilot Chat
   { "github/copilot.vim", branch = "release" },
-
-  -- ChatGPT.nvim
   {
-    "jackMort/ChatGPT.nvim",
+    "greggh/claude-code.nvim",
     dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim"
+      "nvim-lua/plenary.nvim", -- Required for git operations
     },
     config = function()
-      require("chatgpt").setup()
+      require("claude-code").setup()
     end
   },
+
+  -- ChatGPT.nvim
+  -- {
+    -- "jackMort/ChatGPT.nvim",
+    -- dependencies = {
+      -- "MunifTanjim/nui.nvim",
+      -- "nvim-lua/plenary.nvim",
+      -- "folke/trouble.nvim",
+      -- "nvim-telescope/telescope.nvim"
+    -- },
+    -- config = function()
+      -- require("chatgpt").setup()
+    -- end
+  -- },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -181,10 +190,19 @@ return {
         sources = cmp.config.sources({
           { name = 'path' }
         }, {
-          { name = 'cmdline' }
-        }),
+            { name = 'cmdline' }
+          }),
         matching = { disallow_symbol_nonprefix_matching = false }
       })
     end,
   },
+  {
+    'nvim-flutter/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = true,
+  }
 }

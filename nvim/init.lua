@@ -19,9 +19,36 @@ require("lightline")
 require("statusline")
 require("autocmds")
 require("plugin-config.lsp_config")
+-- require("plugin-config.claude")
 -- require("plugin-config.complete")
 require("plugin-config.tree-sitter")
 require("plugin-config.nvim_tree")
+require("flutter-tools").setup({
+  lsp = {
+    on_attach = function(client, bufnr)
+      -- create (or reset) a dedicated augroup safely
+      local ok = pcall(vim.api.nvim_del_augroup_by_name, "dart_fmt")
+      -- ignore error if it doesn't exist
+      local grp = vim.api.nvim_create_augroup("dart_fmt", { clear = true })
+
+      -- LSP formatting on save (sync to avoid races)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = grp,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ async = false })
+        end,
+        desc = "Dart: format on save via LSP",
+      })
+    end,
+
+    -- reduce chances of “edit extends past the end”
+    flags = { allow_incremental_sync = false },
+    on_init = function(client)
+      client.offset_encoding = "utf-16"
+    end,
+  },
+})
 
 local opt = vim.opt
 opt.encoding = "utf-8"

@@ -115,6 +115,6 @@ map("n", "mm", "<Plug>NERDCommenterToggle", {})
 map("v", "mm", "<Plug>NERDCommenterToggle", {})
 
 -- incsearch.vim
-map("n", "/", "<Plug>(incsearch-forward)", {})
-map("n", "?", "<Plug>(incsearch-backward)", {})
-map("n", "g/", "<Plug>(incsearch-stay)", {})
+-- map("n", "/", "<Plug>(incsearch-forward)", {})
+-- map("n", "?", "<Plug>(incsearch-backward)", {})
+-- map("n", "g/", "<Plug>(incsearch-stay)", {})

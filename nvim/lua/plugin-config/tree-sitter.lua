@@ -1,7 +1,10 @@
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    disable = {},
+    disable = {
+      "markdown",
+      "markdown_inline",
+    },
   },
   indent = {
     enable = true,
@@ -19,6 +22,7 @@ require'nvim-treesitter.configs'.setup {
     "lua",
     "vim",
     "sql",
-    "query"
+    "query",
+    "dart"
   },
 }

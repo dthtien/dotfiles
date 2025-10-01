@@ -7,6 +7,19 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities
   }
 end
+
+-- Dart
+lspconfig.dartls.setup{
+  capabilities = capabilities,
+  cmd = { "/opt/homebrew/bin/dart", "language-server", "--protocol=lsp" },
+  on_attach = function(client, bufnr)
+    -- Disable the default formatter
+    client.server_capabilities.documentFormattingProvider = false
+  end
+}
+
+-- Rust tools setup
+
 local opts = {
   capabilities = capabilities,
   tools = {
