@@ -23,6 +23,7 @@ require("plugin-config.lsp_config")
 -- require("plugin-config.complete")
 require("plugin-config.tree-sitter")
 require("plugin-config.nvim_tree")
+require("plugin-config.telescope")
 require("flutter-tools").setup({
   lsp = {
     on_attach = function(client, bufnr)
