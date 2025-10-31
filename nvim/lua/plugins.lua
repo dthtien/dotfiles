@@ -55,13 +55,19 @@ return {
   { "tpope/vim-repeat" },
 
   -- FZF
-  -- {
-    -- "junegunn/fzf",
-    -- build = function()
-      -- vim.fn["fzf#install"]()
-    -- end
-  -- },
-  -- { "junegunn/fzf.vim" },
+  {
+    "junegunn/fzf",
+    build = function()
+      vim.fn["fzf#install"]()
+    end
+  },
+  {
+    "junegunn/fzf.vim",
+    config = function()
+      -- Position fzf at the bottom
+      vim.g.fzf_layout = { down = '40%' }
+    end
+  },
 
   -- Keybinding helper
   -- { "liuchengxu/vim-which-key" },
