@@ -91,7 +91,7 @@ opt.undolevels = 1000
 opt.undoreload = 10000
 opt.splitright = true
 opt.diffopt:append({ "iwhite", "vertical" })
-opt.clipboard = "unnamed"
+opt.clipboard = "unnamedplus"
 opt.shortmess:append("c")
 opt.signcolumn = "yes"
 
