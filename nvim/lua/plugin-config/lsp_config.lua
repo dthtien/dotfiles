@@ -55,7 +55,25 @@ require("rust-tools").setup(opts)
 local util = require 'lspconfig.util'
 local function get_typescript_server_path(root_dir)
 
-  local global_ts = '/Users/dthtien/.nvm/versions/node/v20.12.2/bin/node'
+  local function get_node_path()
+    local node_path = vim.fn.exepath('node')
+    if node_path ~= '' then
+      return node_path
+    end
+
+    local handle = io.popen('which node 2>/dev/null')
+    if handle then
+      local result = handle:read('*a'):gsub('%s+$', '')
+      handle:close()
+      if result ~= '' then
+        return result
+      end
+    end
+
+    return 'node'
+  end
+
+  local global_ts = get_node_path()
 
   -- Alternative location if installed as root:
   -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
